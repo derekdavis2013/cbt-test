@@ -9,9 +9,11 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { Route } from 'react-router-dom';
 import rootReducer from './reducers';
 import { Home } from './components/pages';
+import { Person } from './components/pages';
 
 // Only grid and table styles
 import './style/bootstrap.css';
+import './style/myStyles.css';
 
 const history = createHistory();
 
@@ -34,6 +36,7 @@ ReactDOM.render(
                 <Route path="/">
                     <div>
                         <Route exact path="/" component={Home} />
+                        <Route path="/person/:id" component={Person} />
                     </div>
                 </Route>
             </div>
