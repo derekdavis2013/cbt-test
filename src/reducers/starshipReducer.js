@@ -1,26 +1,29 @@
 import { ERROR, LOADING, SUCCESS, NOT_STARTED } from './statusTypes';
-import { PEOPLE_GET_PENDING, PEOPLE_GET_RESOLVED, PEOPLE_GET_REJECTED } from '../actions/types';
+import { STARSHIP_GET_PENDING, STARSHIP_GET_RESOLVED, STARSHIP_GET_REJECTED } from '../actions/types';
 import assign from 'lodash/assign';
+import clone from 'lodash/clone';
 
 const initialState = {
-    data: {},
+    data: {
+        ships: []
+    },
     status: NOT_STARTED,
     error: {}
 };
 
-const peopleReducer = function (state = initialState, action) {
+const starshipReducer = function (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case PEOPLE_GET_PENDING: {
+        case STARSHIP_GET_PENDING: {
             return assign({}, state, {status: LOADING});
         }
 
-        case PEOPLE_GET_RESOLVED: {
-            return assign({}, state, {data: action.payload, status: SUCCESS});
+        case STARSHIP_GET_RESOLVED: {
+            return assign({}, state, {data: {ships: action.payload}, status: SUCCESS});
         }
 
-        case PEOPLE_GET_REJECTED: {
+        case STARSHIP_GET_REJECTED: {
             return assign({}, state, {status: ERROR, error: { message: action.payload.message}});
         }
 
@@ -30,4 +33,4 @@ const peopleReducer = function (state = initialState, action) {
     }
 };
 
-export default peopleReducer;
+export default starshipReducer;

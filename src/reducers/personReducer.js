@@ -1,6 +1,7 @@
 import { ERROR, LOADING, SUCCESS, NOT_STARTED } from './statusTypes';
-import { PEOPLE_GET_PENDING, PEOPLE_GET_RESOLVED, PEOPLE_GET_REJECTED } from '../actions/types';
+import { PERSON_GET_PENDING, PERSON_GET_RESOLVED, PERSON_GET_REJECTED } from '../actions/types';
 import assign from 'lodash/assign';
+import * as api from '../util/api';
 
 const initialState = {
     data: {},
@@ -8,19 +9,19 @@ const initialState = {
     error: {}
 };
 
-const peopleReducer = function (state = initialState, action) {
+const personReducer = function (state = initialState, action) {
     const { type, payload } = action;
 
     switch (type) {
-        case PEOPLE_GET_PENDING: {
+        case PERSON_GET_PENDING: {
             return assign({}, state, {status: LOADING});
         }
 
-        case PEOPLE_GET_RESOLVED: {
+        case PERSON_GET_RESOLVED: {
             return assign({}, state, {data: action.payload, status: SUCCESS});
         }
 
-        case PEOPLE_GET_REJECTED: {
+        case PERSON_GET_REJECTED: {
             return assign({}, state, {status: ERROR, error: { message: action.payload.message}});
         }
 
@@ -30,4 +31,4 @@ const peopleReducer = function (state = initialState, action) {
     }
 };
 
-export default peopleReducer;
+export default personReducer;
